@@ -1,0 +1,219 @@
+{
+	"swagger": "2.0",
+	"info": {
+	
+		"title": "TODO API Documentation"
+	},
+	"host": "blooming-tor-88277.herokuapp.com",
+    "basePath": "/v1",
+    "schemes": [
+		"https"
+	],
+	"paths": {
+		"/": {
+            "get": {
+				"tags": [
+					"/"
+				],
+				"summary": "Get All Todos ",
+				"description": "Get All Todos",
+				"operationId": "allTodo",
+				"produces": [
+					"application/json"
+				],
+				
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"required": [
+									"todo"
+								],
+								"properties": {
+									"todo": {
+										"type": "string"
+                                    },
+                                    "_id": {
+										"type": "number"
+                                    }
+									
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Invalid status value"
+					}
+				}
+			},
+			"post": {
+				"tags": [
+					"/"
+				],
+				"summary": "Add a new todo",
+				"description": "",
+				"operationId": "addTodo",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Todo object that needs to be added",
+						"required": true,
+						"x-ext-test": "Extension Test",
+						"schema": {
+							"type": "object",
+							"required": [
+								"todo"
+							],
+							"properties": {
+								"todo": {
+									"type": "string"
+								}
+								
+							}
+						}
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "Created"
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"/"
+				],
+				"summary": "Update a todo",
+				"description": "",
+				"operationId": "updateTodo",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "body",
+						"description": "Todo object that needs to be edited",
+						"required": true,
+						"schema": {
+							"type": "object",
+							"required": [
+								"id",
+								"todo"
+							],
+							"properties": {
+								"id": {
+                                    "type": "string",
+									"example": "5ef31fe9216e3d38c853ed5a"
+								},
+								"todo": {
+									"type": "string",
+									"example": "walking"
+								}
+								
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Updated"
+					},
+					"404": {
+						"description": "Todo not found"
+					}
+				}
+			}
+		},
+		"/{todoId}": {
+			"get": {
+				"tags": [
+					"/"
+				],
+				"summary": "Find todo by ID",
+				"description": "Returns a single todo",
+				"operationId": "getTodoById",
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"name": "todoId",
+						"in": "path",
+						"description": "ID of todo to return",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "successful operation",
+						"schema": {
+							"type": "object",
+							"required": [
+								"name",
+								"photoUrls"
+							],
+							"properties": {
+								"id": {
+                                    "type": "string"
+                                
+								},
+								"name": {
+									"type": "string",
+									"example": "walking"
+								}
+								
+							}
+						}
+					},
+					"404": {
+						"description": "Todo not found"
+					}
+				}
+			},
+			"delete": {
+				"tags": [
+					"/"
+				],
+				"summary": "Deletes a todo",
+				"description": "",
+				"operationId": "deleteTodo",
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+				
+					{
+						"name": "todoId",
+						"in": "path",
+						"description": "ID of todo to delete",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"404": {
+						"description": "Todo not found"
+					}
+				}
+			}
+		}
+		
+		
+	}
+	
+}
